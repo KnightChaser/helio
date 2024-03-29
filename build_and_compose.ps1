@@ -26,9 +26,7 @@ docker-compose up -d
 if (-not (docker ps)) {
     Write-Warning "Docker failed to start. Checking for port issues..."
     $DockerPort = 8080
-    if (Test-NetConnection -ComputerName localhost 
-                           -Port $DockerPort 
-                           -InformationLevel Quiet) {
+    if (Test-NetConnection -ComputerName localhost -Port $DockerPort -InformationLevel Quiet) {
         Write-Warning "Target port $DockerPort is in use. Restarting WinNAT service..."
         Restart-WinNAT
         Write-Warning "Trying to start Docker containers again..."
